@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         if (api != null) api.OnDataReceived -= OnDataReceived;
     }
 
-    // ---- UTIL: buscar por playerId (NO por índice) ----
+   
     private PlayerController FindById(int id)
     {
         if (players == null) return null;
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(api.PostPlayerData(gameId, playerId.ToString(), data));
     }
 
-    // Callback desde ApiClient
+  
     public void OnDataReceived(int playerId, ServerData data)
     {
         var p = FindById(playerId);
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     public List<PlayerController> GetPlayers() => players;
 
-    // Activa/quita el control local por ID (se llama desde la UI)
+    
     public void RebindLocalControl(int localId)
     {
         if (players == null) return;

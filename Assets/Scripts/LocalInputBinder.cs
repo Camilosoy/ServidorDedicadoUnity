@@ -9,7 +9,7 @@ public class LocalInputBinder : MonoBehaviour
         var sync = FindObjectOfType<SyncLoop>();
         if (!pc || !sync) return;
 
-        // Si este objeto es el jugador local, añade el LocalInputMover; si no, asegúrate de no tenerlo
+        
         if (pc.GetPlayerId() == sync.localPlayerId)
         {
             if (GetComponent<LocalInputMover>() == null)

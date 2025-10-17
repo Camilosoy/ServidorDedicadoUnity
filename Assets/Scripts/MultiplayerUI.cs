@@ -6,15 +6,15 @@ public class MultiplayerUI : MonoBehaviour
 {
     [Header("Refs")]
     public ApiClient apiClient;
-    public ApiServer apiServer; // obligatorio SOLO en el host
+    public ApiServer apiServer;
     public GameManager gameManager;
     public SyncLoop sync;
 
     [Header("UI (Legacy)")]
-    public InputField ipField;      // 127.0.0.1
-    public InputField portField;    // 5005
-    public InputField gameIdField;  // room-1
-    public InputField localIdField; // 0/1/2...
+    public InputField ipField;      
+    public InputField portField;  
+    public InputField gameIdField; 
+    public InputField localIdField; 
     public GameObject disconnectedPanel;
     public GameObject connectedPanel;
 
@@ -23,13 +23,13 @@ public class MultiplayerUI : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        if (!Application.isPlaying) EnsureDefaults(); // rellena también en el editor
+        if (!Application.isPlaying) EnsureDefaults(); 
     }
 #endif
 
     private void Start()
     {
-        EnsureDefaults();            // y en runtime
+        EnsureDefaults();            
         RefreshPanels();
     }
 
@@ -41,7 +41,7 @@ public class MultiplayerUI : MonoBehaviour
         if (localIdField && string.IsNullOrWhiteSpace(localIdField.text)) localIdField.text = "0";
     }
 
-    // HOST: siempre toma LocalId = 0 (no depende de la UI)
+    
     public void StartAsHost()
     {
         int port = ParseInt(portField ? portField.text : null, 5005);
@@ -95,14 +95,6 @@ public class MultiplayerUI : MonoBehaviour
     public void StopAll()
 
     {
-        //para player host
-        // sync.StopSync();
-        // apiServer?.StopServer();
-        // running = false;
-        // RefreshPanels();
-        // Debug.Log("[UI] Stopped all");
-
-        //modificacion para servidor dedicado
         sync.StopSync();
         
 
@@ -115,9 +107,9 @@ public class MultiplayerUI : MonoBehaviour
             {
                 if (p != null) Destroy(p.gameObject);
             }
-            gameManager.GetPlayers()?.Clear(); // Limpia la lista del GameManager
+            gameManager.GetPlayers()?.Clear(); 
         }
-        // ----------------------------------------------------
+        
 
         running = false;
         RefreshPanels();
